@@ -36,8 +36,12 @@ import './style.css'
 
 // ---------------------------
 
-function logMessage(message: string): void {
-  console.log(message);
-}
+// function logMessage(message: string): void {
+//   console.log(message);
+// }
 
-logMessage("Hi!");
+// logMessage("Hi!");
+
+function throwError(message: string): never {
+  throw new Error(message);
+}
