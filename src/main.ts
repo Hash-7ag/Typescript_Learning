@@ -50,14 +50,23 @@ import './style.css'
 
 // =====
 
-let value: unknown;
+// let value: unknown;
 
-value = 10;
-value = "hello";
+// value = 10;
+// value = "hello";
 
-// Ошибка:
-// console.log(value.toUpperCase());
+// // Ошибка:
+// // console.log(value.toUpperCase());
 
-if (typeof value === "string") {
-  console.log(value.toUpperCase()); // OK
-}
+// if (typeof value === "string") {
+//   console.log(value.toUpperCase()); // OK
+// }
+
+// =====
+
+let data: any;
+
+data = 5;
+data = "text";
+
+console.log(data.toUpperCase()); // Ошибки нет, но может сломаться
