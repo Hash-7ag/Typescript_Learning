@@ -155,28 +155,52 @@ import './style.css'
 
 // =====================
 
-type SuccessResponse = {
-  status: "success";
-  data: string;
+// type SuccessResponse = {
+//   status: "success";
+//   data: string;
+// };
+
+// type ErrorResponse = {
+//   status: "error";
+//   message: string;
+// };
+
+// type ApiResponse = SuccessResponse | ErrorResponse;
+
+// function handleResponse(response: ApiResponse): string {
+//   if (response.status === "success") {
+//     return `Данные: ${response.data}`;
+//   } else {
+//     return `Ошибка: ${response.message}`;
+//   }
+// }
+
+// const res1: ApiResponse = { status: "success", data: "OK" };
+// const res2: ApiResponse = { status: "error", message: "Not found" };
+
+// console.log(handleResponse(res1));
+// console.log(handleResponse(res2));
+
+// =====================
+
+type Events = {
+  login: { userId: number };
+  logout: void;
+  message: { text: string };
 };
 
-type ErrorResponse = {
-  status: "error";
-  message: string;
-};
 
-type ApiResponse = SuccessResponse | ErrorResponse;
+class TypedEventEmitter<E> {
+  private listeners: {
+    [K in keyof E]?: Array<(payload: E[K]) => void>;
+  } = {};
 
-function handleResponse(response: ApiResponse): string {
-  if (response.status === "success") {
-    return `Данные: ${response.data}`;
-  } else {
-    return `Ошибка: ${response.message}`;
+  on<K extends keyof E>(event: K, callback: (payload: E[K]) => void) {
+    this.listeners[event] ??= [];
+    this.listeners[event]!.push(callback);
+  }
+
+  emit<K extends keyof E>(event: K, payload: E[K]) {
+    this.listeners[event]?.forEach(cb => cb(payload));
   }
 }
-
-const res1: ApiResponse = { status: "success", data: "OK" };
-const res2: ApiResponse = { status: "error", message: "Not found" };
-
-console.log(handleResponse(res1));
-console.log(handleResponse(res2));
