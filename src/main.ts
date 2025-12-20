@@ -89,40 +89,66 @@ import './style.css'
 
 // =====
 
-interface User {
-  id: number;
-  name: string;
-  isAdmin?: boolean; // необязательное поле
-}
+// interface User {
+//   id: number;
+//   name: string;
+//   isAdmin?: boolean; // необязательное поле
+// }
 
-const user: User = {
-  id: 1,
-  name: "Alex",
-};
+// const user: User = {
+//   id: 1,
+//   name: "Alex",
+// };
 
-type Product = {
-  id: number;
-  price: number;
-};
+// type Product = {
+//   id: number;
+//   price: number;
+// };
 
-const phone: Product = {
-  id: 1,
-  price: 999,
-};
+// const phone: Product = {
+//   id: 1,
+//   price: 999,
+// };
 
 // =====
 
-function identity<T>(value: T): T {
-  return value;
+// function identity<T>(value: T): T {
+//   return value;
+// }
+
+// identity<number>(10);       // T = number
+// identity<string>("hello");  // T = string
+
+
+// function getFirstElement<T>(arr: T[]): T {
+//   return arr[0];
+// }
+
+// getFirstElement([1, 2, 3]);       // number
+// getFirstElement(["a", "b"]);      // string
+
+// ------------------------------------------
+
+type User = {
+  id: number;
+  name: string;
+  age: number;
+  isActive: boolean;
+};
+
+const users: User[] = [
+  { id: 1, name: "Alex", age: 17, isActive: true },
+  { id: 2, name: "Max", age: 21, isActive: false },
+  { id: 3, name: "Kate", age: 19, isActive: true },
+];
+
+function filterByField<T, K extends keyof T>(
+  items: T[],
+  field: K,
+  value: T[K]
+): T[] {
+  return items.filter(item => item[field] === value);
 }
 
-identity<number>(10);       // T = number
-identity<string>("hello");  // T = string
-
-
-function getFirstElement<T>(arr: T[]): T {
-  return arr[0];
-}
-
-getFirstElement([1, 2, 3]);       // number
-getFirstElement(["a", "b"]);      // string
+const activeUsers = filterByField(users, "isActive", true);
+const adults = filterByField(users, "age", 21);
