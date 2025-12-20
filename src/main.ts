@@ -111,3 +111,18 @@ const phone: Product = {
 };
 
 // =====
+
+function identity<T>(value: T): T {
+  return value;
+}
+
+identity<number>(10);       // T = number
+identity<string>("hello");  // T = string
+
+
+function getFirstElement<T>(arr: T[]): T {
+  return arr[0];
+}
+
+getFirstElement([1, 2, 3]);       // number
+getFirstElement(["a", "b"]);      // string
