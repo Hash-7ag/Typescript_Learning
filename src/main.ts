@@ -73,16 +73,41 @@ import './style.css'
 
 // =====
 
-let id: number | string;
+// let id: number | string;
 
-id = 10;      // OK
-id = "abc";   // OK
-// id = true; // ❌ error
+// id = 10;      // OK
+// id = "abc";   // OK
+// // id = true; // ❌ error
 
-function printId(value: number | string) {
-  if (typeof value === "string") {
-    console.log(value.toUpperCase());
-  } else {
-    console.log(value.toFixed(2));
-  }
+// function printId(value: number | string) {
+//   if (typeof value === "string") {
+//     console.log(value.toUpperCase());
+//   } else {
+//     console.log(value.toFixed(2));
+//   }
+// }
+
+// =====
+
+interface User {
+  id: number;
+  name: string;
+  isAdmin?: boolean; // необязательное поле
 }
+
+const user: User = {
+  id: 1,
+  name: "Alex",
+};
+
+type Product = {
+  id: number;
+  price: number;
+};
+
+const phone: Product = {
+  id: 1,
+  price: 999,
+};
+
+// =====
