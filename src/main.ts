@@ -42,6 +42,22 @@ import './style.css'
 
 // logMessage("Hi!");
 
-function throwError(message: string): never {
-  throw new Error(message);
+// =====
+
+// function throwError(message: string): never {
+//   throw new Error(message);
+// }
+
+// =====
+
+let value: unknown;
+
+value = 10;
+value = "hello";
+
+// Ошибка:
+// console.log(value.toUpperCase());
+
+if (typeof value === "string") {
+  console.log(value.toUpperCase()); // OK
 }
