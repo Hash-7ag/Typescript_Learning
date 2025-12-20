@@ -129,26 +129,54 @@ import './style.css'
 
 // ------------------------------------------
 
-type User = {
-  id: number;
-  name: string;
-  age: number;
-  isActive: boolean;
+// type User = {
+//   id: number;
+//   name: string;
+//   age: number;
+//   isActive: boolean;
+// };
+
+// const users: User[] = [
+//   { id: 1, name: "Alex", age: 17, isActive: true },
+//   { id: 2, name: "Max", age: 21, isActive: false },
+//   { id: 3, name: "Kate", age: 19, isActive: true },
+// ];
+
+// function filterByField<T, K extends keyof T>(
+//   items: T[],
+//   field: K,
+//   value: T[K]
+// ): T[] {
+//   return items.filter(item => item[field] === value);
+// }
+
+// const activeUsers = filterByField(users, "isActive", true);
+// const adults = filterByField(users, "age", 21);
+
+// =====================
+
+type SuccessResponse = {
+  status: "success";
+  data: string;
 };
 
-const users: User[] = [
-  { id: 1, name: "Alex", age: 17, isActive: true },
-  { id: 2, name: "Max", age: 21, isActive: false },
-  { id: 3, name: "Kate", age: 19, isActive: true },
-];
+type ErrorResponse = {
+  status: "error";
+  message: string;
+};
 
-function filterByField<T, K extends keyof T>(
-  items: T[],
-  field: K,
-  value: T[K]
-): T[] {
-  return items.filter(item => item[field] === value);
+type ApiResponse = SuccessResponse | ErrorResponse;
+
+function handleResponse(response: ApiResponse): string {
+  if (response.status === "success") {
+    return `Данные: ${response.data}`;
+  } else {
+    return `Ошибка: ${response.message}`;
+  }
 }
 
-const activeUsers = filterByField(users, "isActive", true);
-const adults = filterByField(users, "age", 21);
+const res1: ApiResponse = { status: "success", data: "OK" };
+const res2: ApiResponse = { status: "error", message: "Not found" };
+
+console.log(handleResponse(res1));
+console.log(handleResponse(res2));
