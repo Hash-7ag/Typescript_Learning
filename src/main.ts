@@ -183,24 +183,58 @@ import './style.css'
 
 // =====================
 
-type Events = {
-  login: { userId: number };
-  logout: void;
-  message: { text: string };
+// type Events = {
+//   login: { userId: number };
+//   logout: void;
+//   message: { text: string };
+// };
+
+
+// class TypedEventEmitter<E> {
+//   private listeners: {
+//     [K in keyof E]?: Array<(payload: E[K]) => void>;
+//   } = {};
+
+//   on<K extends keyof E>(event: K, callback: (payload: E[K]) => void) {
+//     this.listeners[event] ??= [];
+//     this.listeners[event]!.push(callback);
+//   }
+
+//   emit<K extends keyof E>(event: K, payload: E[K]) {
+//     this.listeners[event]?.forEach(cb => cb(payload));
+//   }
+// }
+
+// =====================
+
+function deepClone<T>(value: T): T {
+  if (value === null || typeof value !== "object") {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(item => deepClone(item)) as T;
+  }
+
+  const result: Record<string, unknown> = {};
+
+  for (const key in value) {
+    result[key] = deepClone((value as Record<string, unknown>)[key]);
+  }
+
+  return result as T;
+}
+
+const original = {
+  name: "TS",
+  meta: {
+    level: "advanced",
+    tags: ["types", "generics"],
+  },
 };
 
+const copy = deepClone(original);
 
-class TypedEventEmitter<E> {
-  private listeners: {
-    [K in keyof E]?: Array<(payload: E[K]) => void>;
-  } = {};
+copy.meta.level = "beginner";
 
-  on<K extends keyof E>(event: K, callback: (payload: E[K]) => void) {
-    this.listeners[event] ??= [];
-    this.listeners[event]!.push(callback);
-  }
-
-  emit<K extends keyof E>(event: K, payload: E[K]) {
-    this.listeners[event]?.forEach(cb => cb(payload));
-  }
-}
+console.log(original.meta.level); // advanced
