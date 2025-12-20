@@ -64,9 +64,25 @@ import './style.css'
 
 // =====
 
-let data: any;
+// let data: any;
 
-data = 5;
-data = "text";
+// data = 5;
+// data = "text";
 
-console.log(data.toUpperCase()); // Ошибки нет, но может сломаться
+// console.log(data.toUpperCase());
+
+// =====
+
+let id: number | string;
+
+id = 10;      // OK
+id = "abc";   // OK
+// id = true; // ❌ error
+
+function printId(value: number | string) {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
