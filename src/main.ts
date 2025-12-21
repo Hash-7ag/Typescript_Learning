@@ -288,36 +288,58 @@ import './style.css'
 
 // =====
 
-type EmailNotification = {
-  type: "email";
-  address: string;
-};
+// type EmailNotification = {
+//   type: "email";
+//   address: string;
+// };
 
-type SmsNotification = {
-  type: "sms";
-  phone: string;
-};
+// type SmsNotification = {
+//   type: "sms";
+//   phone: string;
+// };
 
-type PushNotification = {
-  type: "push";
-  token: string;
-};
+// type PushNotification = {
+//   type: "push";
+//   token: string;
+// };
 
-type Notification =
-  | EmailNotification
-  | SmsNotification
-  | PushNotification;
+// type Notification =
+//   | EmailNotification
+//   | SmsNotification
+//   | PushNotification;
 
-function sendNotification(notification: Notification): string {
-  switch (notification.type) {
-    case "email":
-      return `Email to ${notification.address}`;
-    case "sms":
-      return `SMS to ${notification.phone}`;
-    case "push":
-      return `Push to ${notification.token}`;
-    default:
-      const _exhaustive: never = notification;
-      return _exhaustive;
+// function sendNotification(notification: Notification): string {
+//   switch (notification.type) {
+//     case "email":
+//       return `Email to ${notification.address}`;
+//     case "sms":
+//       return `SMS to ${notification.phone}`;
+//     case "push":
+//       return `Push to ${notification.token}`;
+//     default:
+//       const _exhaustive: never = notification;
+//       return _exhaustive;
+//   }
+// }
+ 
+// =====
+
+class Cache<K, V> {
+  private store = new Map<K, V>();
+
+  set(key: K, value: V): void {
+    this.store.set(key, value);
+  }
+
+  get(key: K): V | undefined {
+    return this.store.get(key);
+  }
+
+  has(key: K): boolean {
+    return this.store.has(key);
   }
 }
+
+const cache = new Cache<number, string>();
+cache.set(1, "one");
+cache.get(1); // string | undefined
