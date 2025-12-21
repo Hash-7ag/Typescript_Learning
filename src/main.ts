@@ -241,30 +241,47 @@ import './style.css'
 
 // -------------------------------------------
 
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  inStock: boolean;
-};
+// type Product = {
+//   id: number;
+//   title: string;
+//   price: number;
+//   inStock: boolean;
+// };
 
-function updateField<T, K extends keyof T>(
-  obj: T,
-  key: K,
-  value: T[K]
-): T {
-  return {
-    ...obj,
-    [key]: value,
-  };
+// function updateField<T, K extends keyof T>(
+//   obj: T,
+//   key: K,
+//   value: T[K]
+// ): T {
+//   return {
+//     ...obj,
+//     [key]: value,
+//   };
+// }
+
+// const product: Product = {
+//   id: 1,
+//   title: "Laptop",
+//   price: 1200,
+//   inStock: true,
+// };
+
+// const updated = updateField(product, "price", 1300);
+// // updateField(product, "price", "cheap"); // ❌ 
+
+// =====
+
+function pluck<T, K extends keyof T>(
+  items: T[],
+  key: K
+): T[K][] {
+  return items.map(item => item[key]);
 }
 
-const product: Product = {
-  id: 1,
-  title: "Laptop",
-  price: 1200,
-  inStock: true,
-};
+const users = [
+  { id: 1, name: "Alex", age: 17 },
+  { id: 2, name: "Max", age: 21 },
+];
 
-const updated = updateField(product, "price", 1300);
-// updateField(product, "price", "cheap"); // ❌ 
+const names = pluck(users, "name"); // string[]
+const ages = pluck(users, "age");   // number[]
