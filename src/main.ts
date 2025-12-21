@@ -271,17 +271,53 @@ import './style.css'
 
 // =====
 
-function pluck<T, K extends keyof T>(
-  items: T[],
-  key: K
-): T[K][] {
-  return items.map(item => item[key]);
+// function pluck<T, K extends keyof T>(
+//   items: T[],
+//   key: K
+// ): T[K][] {
+//   return items.map(item => item[key]);
+// }
+
+// const users = [
+//   { id: 1, name: "Alex", age: 17 },
+//   { id: 2, name: "Max", age: 21 },
+// ];
+
+// const names = pluck(users, "name"); // string[]
+// const ages = pluck(users, "age");   // number[]
+
+// =====
+
+type EmailNotification = {
+  type: "email";
+  address: string;
+};
+
+type SmsNotification = {
+  type: "sms";
+  phone: string;
+};
+
+type PushNotification = {
+  type: "push";
+  token: string;
+};
+
+type Notification =
+  | EmailNotification
+  | SmsNotification
+  | PushNotification;
+
+function sendNotification(notification: Notification): string {
+  switch (notification.type) {
+    case "email":
+      return `Email to ${notification.address}`;
+    case "sms":
+      return `SMS to ${notification.phone}`;
+    case "push":
+      return `Push to ${notification.token}`;
+    default:
+      const _exhaustive: never = notification;
+      return _exhaustive;
+  }
 }
-
-const users = [
-  { id: 1, name: "Alex", age: 17 },
-  { id: 2, name: "Max", age: 21 },
-];
-
-const names = pluck(users, "name"); // string[]
-const ages = pluck(users, "age");   // number[]
