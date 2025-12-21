@@ -207,34 +207,64 @@ import './style.css'
 
 // =====================
 
-function deepClone<T>(value: T): T {
-  if (value === null || typeof value !== "object") {
-    return value;
-  }
+// function deepClone<T>(value: T): T {
+//   if (value === null || typeof value !== "object") {
+//     return value;
+//   }
 
-  if (Array.isArray(value)) {
-    return value.map(item => deepClone(item)) as T;
-  }
+//   if (Array.isArray(value)) {
+//     return value.map(item => deepClone(item)) as T;
+//   }
 
-  const result: Record<string, unknown> = {};
+//   const result: Record<string, unknown> = {};
 
-  for (const key in value) {
-    result[key] = deepClone((value as Record<string, unknown>)[key]);
-  }
+//   for (const key in value) {
+//     result[key] = deepClone((value as Record<string, unknown>)[key]);
+//   }
 
-  return result as T;
-}
+//   return result as T;
+// }
 
-const original = {
-  name: "TS",
-  meta: {
-    level: "advanced",
-    tags: ["types", "generics"],
-  },
+// const original = {
+//   name: "TS",
+//   meta: {
+//     level: "advanced",
+//     tags: ["types", "generics"],
+//   },
+// };
+
+// const copy = deepClone(original);
+
+// copy.meta.level = "beginner";
+
+// console.log(original.meta.level); // advanced
+
+// -------------------------------------------
+
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  inStock: boolean;
 };
 
-const copy = deepClone(original);
+function updateField<T, K extends keyof T>(
+  obj: T,
+  key: K,
+  value: T[K]
+): T {
+  return {
+    ...obj,
+    [key]: value,
+  };
+}
 
-copy.meta.level = "beginner";
+const product: Product = {
+  id: 1,
+  title: "Laptop",
+  price: 1200,
+  inStock: true,
+};
 
-console.log(original.meta.level); // advanced
+const updated = updateField(product, "price", 1300);
+// updateField(product, "price", "cheap"); // ❌ 
