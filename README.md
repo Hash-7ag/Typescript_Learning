@@ -1,1 +1,1 @@
-# Tools: Vite + Typescript + Tailwindcss
+# Tools: Vite + Typescript + React
