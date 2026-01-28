@@ -1,4 +1,4 @@
-//*1.1
+//*1.1 Static Typing
 // Example of static type checking 
 function greet(name: string): string{
    return `Hellow ${name}!`;
@@ -10,7 +10,20 @@ greet("World"); // OK
 // The compiler will report an error, and the code will not be compilet to JS
 // until u fix it.
 
-//*1.2
+////-------------------------------------------------------------------->
+
+//*1.2 Strict Typing
+//todo: In JS (weak/dynamic typing)
+//todo: console.log("5" - 2); // 3 (the string "5" is implicitly converted to a number)
+//todo: console.log("5" + 2); // "52" (the number 2 is implicitly converted to a string)
+
+// In TypeScript with strict checks enabled (`strict: true`)
+//! let result1: number = "5" - 2; // ERROR: Type 'string' is not assignable to type 'number'.
+//! let result1: string = "5" + 2; // ERROR: Type 'number' is not assignable to type 'string'.
+
+////-------------------------------------------------------------------->
+
+//*1.3 Structural Typing (Duck Typing)
 interface Point {
    x: number;
    y: number;
