@@ -1,26 +1,44 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    /* Main */
+    "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
 
-    /* Bundler mode */
+    /* Bundler */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
 
-    /* Linting */
+    /* STRICT settings - block on errors */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    
+    /* Additional checks */
+    "noUnusedLocals": true,            // Error if there are unused variables
+    "noUnusedParameters": true,        // Error if there are unused parameters
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    
+    /* Important for blocking assembly */
+    "noEmitOnError": true,             // Do not generate JS if there are TypeScript errors
+    
+    /* Code quality */
+    "forceConsistentCasingInFileNames": true,
+    "allowUnreachableCode": false,     // Error on unreachable code
+    "allowUnusedLabels": false         // Error on unused labels
   },
-  "include": ["src"]
+  "include": ["src"],
 }

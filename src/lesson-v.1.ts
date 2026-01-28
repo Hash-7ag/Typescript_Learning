@@ -1,4 +1,4 @@
-import './style.css'
+// import './style.css'
 
 //* let message: string = "hellow";
 //* message = 12345 // Error: Type 'number' is not assignable to type 'string'.
@@ -324,22 +324,22 @@ import './style.css'
  
 // =====
 
-class Cache<K, V> {
-  private store = new Map<K, V>();
+// class Cache<K, V> {
+//   private store = new Map<K, V>();
 
-  set(key: K, value: V): void {
-    this.store.set(key, value);
-  }
+//   set(key: K, value: V): void {
+//     this.store.set(key, value);
+//   }
 
-  get(key: K): V | undefined {
-    return this.store.get(key);
-  }
+//   get(key: K): V | undefined {
+//     return this.store.get(key);
+//   }
 
-  has(key: K): boolean {
-    return this.store.has(key);
-  }
-}
+//   has(key: K): boolean {
+//     return this.store.has(key);
+//   }
+// }
 
-const cache = new Cache<number, string>();
-cache.set(1, "one");
-cache.get(1); // string | undefined
+// const cache = new Cache<number, string>();
+// cache.set(1, "one");
+// cache.get(1); // string | undefined
